@@ -23,6 +23,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+import os
 import subprocess
 from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
@@ -202,7 +203,6 @@ wmname = "LG3D"
 
 @hook.subscribe.startup_once
 def autostart_once():
-    processes = ['polybar']
+    processes = ['~/.config/polybar/launch.sh']
     for p in processes:
-        subprocess.Popen(p)
-
+        subprocess.Popen([os.path.expanduser(p)])
