@@ -40,12 +40,12 @@ Rectangle {
     Connections {
         target: sddm
 
-        onLoginSucceeded: {
+        function onLoginSucceeded() {
             errorMessage.color = "steelblue"
             errorMessage.text = textConstants.loginSucceeded
         }
 
-        onLoginFailed: {
+        function onLoginFailed() {
             password.text = ""
             errorMessage.color = "red"
             errorMessage.text = textConstants.loginFailed
@@ -54,11 +54,12 @@ Rectangle {
 
     Background {
         anchors.fill: parent
-        source: config.background
+        source: Qt.resolvedUrl(config.background)
         fillMode: Image.PreserveAspectCrop
         onStatusChanged: {
-            if (status == Image.Error && source != config.defaultBackground) {
-                source = config.defaultBackground
+            var defaultBackground = Qt.resolvedUrl(config.defaultBackground)
+            if (status == Image.Error && source != defaultBackground) {
+                source = defaultBackground
             }
         }
     }
@@ -193,7 +194,7 @@ Rectangle {
 			    font.family: "Monocraft"
                             font.pixelSize: 14
 
-                            arrowIcon: "angle-down.png"
+			    arrowIcon: Qt.resolvedUrl("angle-down.png")
 			    arrowColor: "transparent"
                             color: "25000000"
 			    textColor: "#da8548"
@@ -294,5 +295,4 @@ Rectangle {
             password.focus = true
     }
 }
-
 

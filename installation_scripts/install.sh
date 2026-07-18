@@ -58,9 +58,10 @@ theme=$(dialog --stdout --inputbox "Enter sudo password to copy Grub theme and S
 if [[ $theme =~ y ]]
 then
 	        sudo cp -r $LINKDOT/boot/grub/grubel /boot/grub/
-		#sudo cp -r $LINKDOT/boot/sddm/themes/pixarch_sddm /usr/share/sddm/themes/
+		sudo install -d /usr/share/sddm/themes/pixarch_sddm
+		sudo cp -a "$LINKDOT/boot/sddm/themes/pixarch_sddm/." /usr/share/sddm/themes/pixarch_sddm/
 		sudo sed 's/\#GRUB_THEME\=\"\/path\/to\/gfxtheme\"/GRUB_THEME=\"\/boot\/grub\/grubel\/theme.txt\"/' -i /etc/default/grub
-                #sudo cp $LINKDOT/installation_scripts/theme.conf /etc/sddm.conf
+		sudo install -Dm644 "$LINKDOT/installation_scripts/theme.conf" /etc/sddm.conf.d/pixarch-theme.conf
 else 
 	echo "Grub and SDDM theme not installed."
 fi
@@ -99,5 +100,4 @@ fi
 #shell=$(dialog --stdout --input "Which shell do you use? " 0 0) || exit 1
 #if [[ $shell =~ bash ]]
 #then 
-
 
